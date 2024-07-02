@@ -25,7 +25,7 @@ class AuthController {
             email: req.body.email,
             password: req.body.password
         };
-        await userService.create(newUser);
+        await userService.createUser(newUser);
         return res.status(201).json({message: 'User created'});
     }
 
