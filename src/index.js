@@ -1,14 +1,14 @@
 // Import các module từ thư viện Node.js và các module local
 import express from 'express';
 import { connection } from './database/database.config.js';
-import routers from './apis/access/index.js';
-
+import router from './apis/index.js';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api', routers);
+app.use('/apis', router);
+
 
 (async () => {
     try {
@@ -22,3 +22,4 @@ app.use('/api', routers);
         console.log(error);
     }
 })();
+//Role//alter/admin/account admin

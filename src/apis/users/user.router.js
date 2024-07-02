@@ -1,6 +1,6 @@
 import express from 'express';
 import userController from './user.controller.js';
-import verify from '../../middleware/verify.middleware.js'
+import {verify} from '../../middleware'
 const router = express.Router();
 router.get('/', userController.getAllUser);
 // router.get('/:id', userController.getUserById);
