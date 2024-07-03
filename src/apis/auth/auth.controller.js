@@ -16,18 +16,23 @@ class AuthController {
             return res.status(500).json({ message: 'Internal server error' });
         }
     }
-    register = async (req, res, next) =>{
-        let newUser = {
-            name: req.body.name,
-            gender: req.body.gender,
-            age: req.body.age,
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password
-        };
-        await userService.create(newUser);
-        return res.status(201).json({message: 'User created'});
-    }
+    register = async (req, res, next) => {
+        try {
+            let newUser = {
+                name: req.body.name,
+                gender: req.body.gender,
+                age: req.body.age,
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password
+            };
+            await userService.createUser(newUser);
+            return res.status(201).json({ message: 'User created' });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+    }; 
 
     // forgotPassword = async (req, ré, next) => {
     //     const {email} = req.body;
