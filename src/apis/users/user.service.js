@@ -16,17 +16,21 @@ class UserService {
             throw new Error(error);
         }
     }
-    async createUser(user){
+    async createUser(user) {
         try {
-            const passwordString = String(user.password);
-            const hashedPassword = user.password = user.password ? await bcrypt.hash(passwordString, 10) : null;
-            user.password = hashedPassword;
+            if (user.password) {
+                const passwordString = String(user.password);
+                const hashedPassword = await bcrypt.hash(passwordString, 10);
+                user.password = hashedPassword;
+            } else {
+                user.password = null;
+            }
             return await UserModel.createUser(user);
         } catch (error) {
             console.log(error);
             throw new Error(error);
         }
-    }
+    }    
 
     async updateUser(id, user){
         try {
